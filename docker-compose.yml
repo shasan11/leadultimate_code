@@ -1,0 +1,40 @@
+version: '3'
+services:
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - postgres
+    command: >
+      sh -c "python manage.py migrate && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - postgres
+    command: celery -A mainsite worker --loglevel=info --concurrency=10 
+
+  redis:
+    image: redis:latest
+    expose:
+      - 6379
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=lead_ultimate_user
+      - POSTGRES_PASSWORD=Balkot11@
+      - POSTGRES_DB=lead_ultimate_db
