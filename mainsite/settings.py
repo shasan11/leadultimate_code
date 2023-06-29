@@ -105,3 +105,14 @@ EMAIL_HOST_USER = 'trail_email@cortifox.com'
 EMAIL_HOST_PASSWORD = 'Balkot11@'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'trail_email@cortifox.com'
+
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Leds Ultimate Admin",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Leads Ultimate Admin",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Leads Ultimate Admin"
+}
